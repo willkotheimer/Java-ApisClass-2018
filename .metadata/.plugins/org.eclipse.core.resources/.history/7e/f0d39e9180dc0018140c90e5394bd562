@@ -1,0 +1,37 @@
+package com.cooksys.ftd.sprintboot.controller;
+
+import com.cooksys.ftd.sprintboot.exceptions.UserNotFound;
+import com.cooksys.ftd.sprintboot.service.Question;
+import com.cooksys.ftd.sprintboot.service.Quiz;
+import com.cooksys.ftd.sprintboot.service.QuizService;
+import com.cooksys.ftd.sprintboot.service.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class QuizController {
+
+	private QuizService quizService;
+
+	@Autowired
+	public QuizController(QuizService quizService) {
+		super();
+		this.quizService = quizService;
+	}
+
+	@GetMapping("quiz")
+	public List<Quiz> getQuizzes() {
+		return quizService.getquizzes;
+	}
+	
+	/*@GetMapping("quiz/{quizName}/random") 
+	public Question getRandomQuestionFromQuiz(@PathVariable("quizName") String quizName) throws QuizNotFound, QuizHasNoQuestions {
+		return this.quizService.getRandomQuestionFromQuiz(quizName);
+	}
+*/
+
+}

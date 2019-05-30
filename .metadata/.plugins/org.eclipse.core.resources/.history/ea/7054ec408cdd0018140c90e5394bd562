@@ -1,0 +1,68 @@
+package controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import dto.CredentialsDTO;
+import dto.HashtagDTO;
+import dto.TweetDTO;
+import exceptions.CredentialsNotMatching;
+import service.tweetService;
+import exceptions.NoTweetsMatching;
+
+
+public class TweetsController {
+
+	@GetMapping("tweets")
+	public List<TweetDTO> getAllTweets() {
+		return tweetService.getAllTweets();
+		
+	}
+	
+	@PostMapping("tweet")
+	public TweetDTO postTweet(@RequestBody String content, @RequestBody CredentialsDTO credentials ) throws CredentialsNotMatching {
+		return tweetService.postTweet(content,credentials);
+	}
+	
+	@GetMapping("tweets/{id}")
+	public TweetDTO getTweetById(@PathVariable("id") Long id) throws NoTweetsMatching {
+		return tweetService.getTweetbyId(id);
+	}
+	
+	@DeleteMapping("tweets/{id}")
+	public TweetDTO deleteTweetByID(@PathVariable String id, @RequestBody CredentialsDTO credentials) throws CredentialsNotMatching, NoTweetsMatching {
+		return tweetService.deleteTweetById(id);
+	}
+	
+	@PostMapping("tweets/{id}/reply")
+	public TweetDTO postreply(@PathVariable Long id, @RequestBody CredentialsDTO credentials, @RequestBody String content) throws CredentialsNotMatching, NoTweetsMatching {
+		return tweetService.postReply(id,credentials,content);
+	}
+	
+	
+	
+	@PostMapping("tweets/{id}/repost")
+	public TweetDTO postreply(@PathVariable Long id, @RequestBody CredentialsDTO credentials) throws CredentialsNotMatching, NoTweetsMatching {
+		return tweetService.postRepost(id,credentials);
+	}
+	
+	@GetMapping("tweets/{id}/tags")
+	public HashtagDTO getHashTagsByTweet(@PathVariable("id") Long id) throws NoTweetsMatching {
+		return tweetService.getHashTagsByTweetId(id);
+	}
+	
+	@GetMapping("tweets/{id}/likes")
+	public List<UserDTO> getUsersWhoLiked(@PathVariable("id") Long id) throws NoTweetsMatching {
+		return tweetService.getUsersWhoLiked(id);
+	}
+	
+	@GetMapping("tweets/{id}/context")
+	public List<UserDTO>
+	
+	
+}

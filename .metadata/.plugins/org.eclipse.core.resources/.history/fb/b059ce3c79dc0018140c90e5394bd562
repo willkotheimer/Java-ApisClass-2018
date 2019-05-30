@@ -1,0 +1,44 @@
+package com.cooksys.ftd.sprintboot.controller;
+
+import com.cooksys.ftd.sprintboot.exceptions.UserNotFound;
+import com.cooksys.ftd.sprintboot.service.User;
+import com.cooksys.ftd.sprintboot.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class UserController {
+
+    private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("user")
+    public List<User> getUsers() {
+        return this.userService.getUsers();
+    }
+
+    @GetMapping("user/{name}")
+    public User getUser(@PathVariable("name") String name) throws UserNotFound {
+        return this.userService.getUser(name);
+    }
+
+    @PostMapping("user")
+    public boolean addUser(@RequestBody User user) throws UserNotFound {
+        return this.userService.addUser(user);
+    }
+
+    @DeleteMapping("user")
+    public User deleteUser(@RequestParam("name") String name) {
+        return this.userService.deleteUser(name);
+    }
+
+
+
+}

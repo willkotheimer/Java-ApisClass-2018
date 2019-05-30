@@ -1,0 +1,66 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import com.cooksys.ftd.sprintboot.exceptions.UserNotFound;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Service
+public class QuizService {
+
+	// real bad code
+	private List<Quiz> quizzes = new ArrayList<>();
+	private Quiz quiz;
+
+	public QuizService() {
+
+		// Question "Do you need anything?"
+		Answer answer1 = new Answer("no", false);
+		Answer answer2 = new Answer("I need sleep", false);
+		Answer answer3 = new Answer("I need to eat", false);
+		Answer answer4 = new Answer("yes", true);
+
+		ArrayList<Answer> Answer = new ArrayList<>();
+
+		Answer.add(answer1);
+		Answer.add(answer2);
+		Answer.add(answer3);
+		Answer.add(answer4);
+
+		// Question "Do you want anything?"
+		Answer answer5 = new Answer("no", false);
+		Answer answer6 = new Answer("I want an xbox", false);
+		Answer answer7 = new Answer("I want a new car", false);
+		Answer answer8 = new Answer("I want a million dollars", true);
+
+		ArrayList<Answer> Answer2 = new ArrayList<>();
+
+		Answer2.add(answer5);
+		Answer2.add(answer6);
+		Answer2.add(answer7);
+		Answer2.add(answer8);
+
+		List<Question> quiz1 = new List<Question>();
+		
+		quiz1.add(new Question("Do you want anything", Answer));
+		quiz1.add(new Question("Do you need anything?",Answer2));
+
+		List<Quiz> quizzes = new ArrayList<>();
+		
+		quizzes.add(new Quiz("Quiz1",quiz1));
+	}
+
+	@SuppressWarnings("unused")
+	private Quiz getQuiz(String name) {
+		name = name.toLowerCase();
+		for (Quiz quiz : this.quizzes) {
+			if (name.equals(quiz.getName().toLowerCase())) {
+				return quiz;
+			}
+		}
+		return null;
+	}
+
+}

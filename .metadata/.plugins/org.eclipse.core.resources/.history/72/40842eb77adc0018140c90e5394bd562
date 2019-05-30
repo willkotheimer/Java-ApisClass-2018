@@ -1,0 +1,93 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import com.cooksys.ftd.sprintboot.exceptions.UserNotFound;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Service
+public class QuizService {
+
+    // real bad code
+    private List<Quiz> quizzes = new ArrayList<>();
+    private Quiz quiz;
+
+    
+    public QuizService() {
+    	
+    	//Question "Do you need anything?"
+    	Answers answer1 =  new Answers("no",false);
+    	Answers answer2 =  new Answers("I need sleep", false);
+    	Answers answer3 =  new Answers("I need to eat", false);
+    	Answers answer4 =  new Answers("yes", true);
+    	
+    	ArrayList<Answers> AnswerSet = new ArrayList<>();
+    	
+    	AnswerSet.add(answer1);
+    	AnswerSet.add(answer2);
+    	AnswerSet.add(answer3);
+    	AnswerSet.add(answer4);
+    	
+    	
+    	//Question "Do you want anything?"
+    	Answers answer5 =  new Answers("no",false);
+    	Answers answer6 =  new Answers("I want an xbox", false);
+    	Answers answer7 =  new Answers("I want a new car", false);
+    	Answers answer8 =  new Answers("I want a million dollars", true);
+    	
+    	ArrayList<Answers> AnswerSet2 = new ArrayList<>();
+    	
+    	AnswerSet2.add(answer5);
+    	AnswerSet2.add(answer6);
+    	AnswerSet2.add(answer7);
+    	AnswerSet2.add(answer8);
+    	
+    	
+    	@SuppressWarnings("serial")
+		List<Question> quiz1 = new ArrayList<Question>();
+    	
+            
+        quiz1.add(new Question("Do you want anything",AnswerSet));
+        quiz1.add(new Question("Do you need anything?",AnswerSet2));
+            
+    	
+            
+            
+    	
+    	
+    	
+    	
+    	
+    	
+
+
+    }
+
+    // real code
+    public List<User> getUsers() {
+        return this.quizzes;
+    }
+
+    public Quiz getQuiz(String name) throws QuizNotFound {
+        for (Quiz quiz : quizzes) {
+            if (quiz.getName().equalsIgnoreCase(name)) {
+                return quiz;
+            }
+        }
+        throw new UserNotFound();
+    }
+
+   
+/*use of quizzes object*/
+    
+    public Quiz deleteQuestion(String name) {
+        for (int i = 0; i < this.quiz.size(); i++) {
+            if (this.quiz.getName().equalsIgnoreCase(name)) {
+                return this.quiz.remove(i);
+            }
+        }
+        return null;
+    }
+}

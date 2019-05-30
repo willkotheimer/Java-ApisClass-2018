@@ -1,0 +1,8 @@
+1540395870894	Delete element
+1540395876104	Delete element
+1540406770179	Move 'dao' to 'smartshare'
+1540406829977	Delete element
+1540407123538	Rename type 'postgresDB'
+1540421801397	Delete element
+1540423713792	Encapsulate field 'time_created'
+1540423731390	Encapsulate field 'total_downloads'

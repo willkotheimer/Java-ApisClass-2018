@@ -1,0 +1,103 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class QuizService {
+
+	// real bad code
+	private List<Quiz> quizzes = new ArrayList<>();
+	private Quiz quiz;
+
+	public QuizService() {
+
+		// Question "Do you need anything?"
+		Answer answer1 = new Answer("no", false);
+		Answer answer2 = new Answer("I need sleep", false);
+		Answer answer3 = new Answer("I need to eat", false);
+		Answer answer4 = new Answer("yes", true);
+
+		ArrayList<Answer> Answer = new ArrayList<>();
+
+		Answer.add(answer1);
+		Answer.add(answer2);
+		Answer.add(answer3);
+		Answer.add(answer4);
+
+		// Question "Do you want anything?"
+		Answer answer5 = new Answer("no", false);
+		Answer answer6 = new Answer("I want an xbox", false);
+		Answer answer7 = new Answer("I want a new car", false);
+		Answer answer8 = new Answer("I want a million dollars", true);
+
+		ArrayList<Answer> Answer2 = new ArrayList<>();
+
+		Answer2.add(answer5);
+		Answer2.add(answer6);
+		Answer2.add(answer7);
+		Answer2.add(answer8);
+
+		List<Question> quiz1 = new ArrayList<>();
+
+		quiz1.add(new Question("Do you want anything", Answer));
+		quiz1.add(new Question("Do you need anything?", Answer2));
+
+		this.quizzes.add(new Quiz("Quiz1", quiz1));
+	}
+
+	public Quiz rename(String name, String newname) {
+		name = name.toLowerCase();
+		newname = newname.toLowerCase();
+		for (Quiz quiz : this.quizzes) {
+			if (name.equals(quiz.getName().toLowerCase())) {
+				quiz.setName(newname);
+				return quiz;
+			}
+		}
+		return null;
+	}
+
+	public Quiz getQuiz(String name) {
+		name = name.toLowerCase();
+		for (Quiz quiz : this.quizzes) {
+			if (name.equals(quiz.getName().toLowerCase())) {
+				return quiz;
+			}
+		}
+		return null;
+	}
+
+	public List<Quiz> getQuizzes() {
+		return this.quizzes;
+	}
+
+	public Question getRandomQuestion(String quizName) {
+
+		// GetLengthofQuiz
+
+		int maximum = quizzes.size();
+
+		// select which quiz
+		int randomNum = 0 + (int) (Math.random() * maximum);
+
+		/*if(randomNum==0) {return null;}
+		*/
+		Quiz quiz = quizzes.get(randomNum);
+		int maximum2 = quiz.getQuiz().size();
+		
+		// select which question
+		int randomNum2 = 0 + (int) (Math.random() * maximum);
+		
+		/*
+		if(randomNum2==0) {return null;}*/
+		
+		//return random question:
+		
+		return quiz.getQuiz().get(randomNum2-1);
+
+	}
+
+}

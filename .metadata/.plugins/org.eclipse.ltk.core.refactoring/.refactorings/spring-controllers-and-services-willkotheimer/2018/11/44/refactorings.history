@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.cooksys.ftd.sprintboot.controller.advice&apos; to &apos;social-media-assessment-willkotheimer/src/main/java&apos;&#x0D;&#x0A;- Original project: &apos;spring-controllers-and-services-willkotheimer&apos;&#x0D;&#x0A;- Destination element: &apos;social-media-assessment-willkotheimer/src/main/java&apos;&#x0D;&#x0A;- Original element: &apos;spring-controllers-and-services-willkotheimer/src/main/java/com.cooksys.ftd.sprintboot.controller.advice&apos;" description="Copy package" destination="=social-media-assessment-willkotheimer/src\/main\/java" element1="/src\/main\/java&lt;com.cooksys.ftd.sprintboot.controller.advice" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1541032499434" version="1.0"/>
+</session>

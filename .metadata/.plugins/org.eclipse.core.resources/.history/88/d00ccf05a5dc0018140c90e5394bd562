@@ -1,0 +1,96 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import org.springframework.stereotype.Service;
+
+import com.cooksys.ftd.sprintboot.exceptions.QuizNotFound;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Service
+public class QuizService {
+
+	// real bad code
+	private List<Quiz> quizzes = new ArrayList<>();
+	private Quiz quiz;
+
+	public QuizService() {
+
+		// Question "Do you need anything?"
+		Answer answer1 = new Answer("no", false);
+		Answer answer2 = new Answer("I need sleep", false);
+		Answer answer3 = new Answer("I need to eat", false);
+		Answer answer4 = new Answer("yes", true);
+
+		ArrayList<Answer> Answers = new ArrayList<>();
+
+		Answers.add(answer1);
+		Answers.add(answer2);
+		Answers.add(answer3);
+		Answers.add(answer4);
+
+		List<Question> quiz1 = new ArrayList<>();
+		
+
+		
+		// Question "Do you want anything?"
+		Answer answer5 = new Answer("no", false);
+		Answer answer6 = new Answer("I want an xbox", false);
+		Answer answer7 = new Answer("I want a new car", false);
+		Answer answer8 = new Answer("I want a million dollars", true);
+
+		ArrayList<Answer> Answers2 = new ArrayList<>();
+
+		Answers2.add(answer5);
+		Answers2.add(answer6);
+		Answers2.add(answer7);
+		Answers2.add(answer8);
+
+		
+
+		quiz1.add(new Question("Do you need anything?", Answers));
+		quiz1.add(new Question("Do you want anything", Answers2));
+		this.quizzes.add(new Quiz("Quiz1", quiz1));
+	}
+
+	public Quiz rename(String name, String newname)  {
+		name = name.toLowerCase();
+		newname = newname.toLowerCase();
+		for (Quiz quiz : this.quizzes) {
+			if (name.equals(quiz.getName().toLowerCase())) {
+				quiz.setName(newname);
+				return quiz;
+			}
+		}
+		return null;
+	}
+
+	public Quiz getQuiz(String name) {
+		name = name.toLowerCase();
+		for (Quiz quiz : this.quizzes) {
+			if (name.equals(quiz.getName().toLowerCase())) {
+				return quiz;
+			}
+		}
+		return null;
+	}
+
+	public List<Quiz> getQuizzes() {
+		return this.quizzes;
+	}
+	
+	
+public List<Question> getRandomQuestion(String quizName) throws QuizNotFound {
+		
+				Quiz quiz = getQuiz(quizName);
+				int maximum = quiz.getQuiz().size()-1;
+				int randomNum = 0 + (int)(Math.random() * maximum);
+			
+				return quiz.getQuiz();
+			
+	
+	}
+
+}
+

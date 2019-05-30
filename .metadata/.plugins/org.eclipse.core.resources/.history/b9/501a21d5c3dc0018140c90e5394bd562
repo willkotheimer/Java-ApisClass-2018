@@ -1,0 +1,64 @@
+package com.cooksys.ftd.sprintboot.controller;
+
+import com.cooksys.ftd.sprintboot.exceptions.QuizNotFound;
+import com.cooksys.ftd.sprintboot.service.Question;
+import com.cooksys.ftd.sprintboot.service.Quiz;
+import com.cooksys.ftd.sprintboot.service.QuizService;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class QuizController {
+
+	private QuizService quizService;
+
+	@Autowired
+	public QuizController(QuizService quizService) {
+		super();
+		this.quizService = quizService;
+	}
+	
+	@GetMapping("quiz")
+	public Quiz getQuiz(String name) {
+		return quizService.getQuiz(name);
+	}
+
+	@GetMapping("quizzes")
+	public List<Quiz> getQuizzes() {
+		return quizService.getQuizzes();
+	}
+	
+	@GetMapping("quiz/{quizName}/rename/{newName}")
+	public Quiz rename(@PathVariable("quizName") String quizName, @PathVariable("newName") String newName) {
+		return quizService.rename(quizName,newName);
+	}
+	
+	
+	
+	@GetMapping("quiz/{quizName}/random") 
+	public Question getRandomQuestion(@PathVariable("quizName") String quizName) throws QuizNotFound {
+		return this.quizService.getRandomQuestion(quizName);
+	}
+	
+	@PatchMapping("quiz/{quizName}/add")
+	public Quiz addQuestion(@PathVariable("quizName") String quizName,  @RequestBody Question question) {
+		return this.quizService.addQuestion(question,quizName);
+	}
+	
+	@PostMapping("quiz")
+	public Quiz addQuiz(@RequestBody Quiz quiz) {
+		return this.quizService.AddQuiz(quiz);
+	}
+	
+	@DeleteMapping("quiz/{quizName}")
+	public Quiz deleteQuiz(@PathVariable String quizName) {
+		return this.quizService.deleteQuiz(quizName);
+	}
+
+	
+}

@@ -1,0 +1,132 @@
+package com.ftd.smartshare.server;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.net.Socket;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Arrays;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import org.apache.commons.io.IOUtils;
+
+import com.ftd.smartshare.client.api.Api;
+
+//import org.apache.commons.io.IOUtils;
+
+import com.ftd.smartshare.dao.FileCommands;
+import com.ftd.smartshare.dto.DownloadRequestDto;
+import com.ftd.smartshare.dto.UploadRequestDto;
+import com.ftd.smartshare.entity.FileEntity;
+
+public class ClientHandler implements Runnable {
+
+	private Socket clientSocket;
+
+	public ClientHandler(Socket clientSocket) {
+		this.clientSocket = clientSocket;
+	}
+
+	public void run() {
+
+		try {
+
+			BufferedReader in1 = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
+			// Object message;
+
+			JAXBContext context = JAXBContext.newInstance(UploadRequestDto.class, DownloadRequestDto.class);
+			Unmarshaller unmarshaller = null;
+			unmarshaller = context.createUnmarshaller();
+			StringReader stringReader = new StringReader(in1.readLine());
+			Object reqObject = (Object) unmarshaller.unmarshal(stringReader);
+
+			if (reqObject instanceof UploadRequestDto) {
+
+				UploadRequestDto UploadObject = new UploadRequestDto();
+
+				// upcast object
+				UploadObject = (UploadRequestDto) reqObject;
+
+				System.out.println(stringReader.toString());
+
+				System.out.println("Im in upload object");
+
+				System.out.println(UploadObject.toStringPretty());
+
+				String name = UploadObject.getFile_name();
+				byte[] file = UploadObject.getFile();
+				int millisecond = 1000;
+				Timestamp timeavailable = new Timestamp(
+						(System.currentTimeMillis() + UploadObject.getExpiry_time()) * millisecond*60);
+				Timestamp timecreated = new Timestamp(System.currentTimeMillis() * millisecond*60);
+				int max_downloads = UploadObject.getMax_downloads();
+				int total_downloads = max_downloads;
+				String pass = UploadObject.getPassword();
+
+				//byte[] file = IOUtils.toByteArray(UploadObject.getFile());
+				
+				
+				FileEntity fe = new FileEntity(name, file, timecreated, timeavailable, max_downloads,
+						total_downloads, pass);
+				
+				FileCommands fc =  new FileCommands();
+				
+				fc.save(fe);
+			
+
+			} else if (reqObject instanceof DownloadRequestDto) {
+
+				DownloadRequestDto DownloadObject = new DownloadRequestDto();
+
+				// upcast object
+				DownloadObject = (DownloadRequestDto) reqObject;
+
+				Boolean success = false;
+				
+				//Check if there are records that match the username and password.
+				
+				
+				
+					
+					/*
+					 * 
+					 * To do: 
+					 * 
+					 * 
+					 * get the info from the database if expired delete it and return error
+					 * 
+					 * if not expired, marshall back
+					 * 
+					 * 
+					 * update the amount of things in the database,
+
+					   Get info from database and marshall it down to the user
+					 * 
+					 * 
+					 */
+					
+					
+					System.out.println("Im in download object");
+
+					System.out.println(DownloadObject.toString());
+				
+			}
+
+		} catch (IOException | JAXBException io) {
+			io.printStackTrace();
+		}
+
+	}
+
+	
+
+	public Socket getClientSocket() {
+		return clientSocket;
+	}
+
+}

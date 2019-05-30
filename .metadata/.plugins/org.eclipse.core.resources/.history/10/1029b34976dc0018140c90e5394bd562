@@ -1,0 +1,56 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import com.cooksys.ftd.sprintboot.exceptions.UserNotFound;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Service
+public class QuizService {
+
+    // real bad code
+    private List<Quiz> quizzes = new ArrayList<>();
+
+    public QuizService() {
+        this.quizzes.add(new Quiz("Life",
+        		 new Question("hdkjsahdkjas", 
+        				new ArrayList(
+        				new Answer("fhdkjsfhsdkj", true),
+        				new Answer("fhdkjsfhsdkj", false)),
+        		new Question("hdkjsahdkjas", 
+                		new ArrayList(
+                		new Answer("fhdkjsfhsdkj", true),
+                		new Answer("fhdkjsfhsdkj", false))
+                		))
+        		 
+        		 );
+        
+    }
+
+    // real code
+    public List<User> getUsers() {
+        return this.quizzes;
+    }
+
+    public User getUser(String name) throws UserNotFound {
+        for (User quiz : quizzes) {
+            if (quiz.getName().equalsIgnoreCase(name)) {
+                return quiz;
+            }
+        }
+        throw new UserNotFound();
+    }
+
+   
+
+    public User deleteUser(String name) {
+        for (int i = 0; i < this.users.size(); i++) {
+            if (this.users.get(i).getName().equalsIgnoreCase(name)) {
+                return this.users.remove(i);
+            }
+        }
+        return null;
+    }
+}

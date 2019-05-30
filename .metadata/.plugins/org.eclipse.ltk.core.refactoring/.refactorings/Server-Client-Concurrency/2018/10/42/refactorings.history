@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;cooksys.Server_Client_Concurrency.Client&apos; to &apos;ClientHandler&apos;&#x0D;&#x0A;- Original project: &apos;Server-Client-Concurrency&apos;&#x0D;&#x0A;- Original element: &apos;cooksys.Server_Client_Concurrency.Client&apos;&#x0D;&#x0A;- Renamed element: &apos;cooksys.Server_Client_Concurrency.ClientHandler&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Client&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;cooksys.Server_Client_Concurrency{Client.java[Client" matchStrategy="1" name="ClientHandler" qualified="false" references="true" similarDeclarations="false" stamp="1539965821568" textual="false" version="1.0"/>
+</session>

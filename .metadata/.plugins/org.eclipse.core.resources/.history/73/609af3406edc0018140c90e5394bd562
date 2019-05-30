@@ -1,0 +1,42 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import java.awt.List;
+
+public class Quiz {
+
+    private String name;
+    private int age;
+
+    List Questions = new List();
+    
+    public Quiz() {}
+
+    public Quiz(String name, List Questions) {
+        this.name = name;
+        this.Questions = Questions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}

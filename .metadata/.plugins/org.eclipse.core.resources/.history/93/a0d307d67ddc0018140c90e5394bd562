@@ -1,0 +1,69 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import com.cooksys.ftd.sprintboot.exceptions.UserNotFound;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Service
+public class QuizService {
+
+    // real bad code
+    private List<Quiz> quizzes = new ArrayList<>();
+    private Quiz quiz;
+
+    
+    public QuizService() {
+    	
+    	//Question "Do you need anything?"
+    	Answer answer1 =  new Answer("no",false);
+    	Answer answer2 =  new Answer("I need sleep", false);
+    	Answer answer3 =  new Answer("I need to eat", false);
+    	Answer answer4 =  new Answer("yes", true);
+    	
+    	ArrayList<Answer> Answeret = new ArrayList<>();
+    	
+    	Answeret.add(answer1);
+    	Answeret.add(answer2);
+    	Answeret.add(answer3);
+    	Answeret.add(answer4);
+    	
+    	
+    	//Question "Do you want anything?"
+    	Answer answer5 =  new Answer("no",false);
+    	Answer answer6 =  new Answer("I want an xbox", false);
+    	Answer answer7 =  new Answer("I want a new car", false);
+    	Answer answer8 =  new Answer("I want a million dollars", true);
+    	
+    	ArrayList<Answer> Answeret2 = new ArrayList<>();
+    	
+    	Answeret2.add(answer5);
+    	Answeret2.add(answer6);
+    	Answeret2.add(answer7);
+    	Answeret2.add(answer8);
+    	
+    	
+    	@SuppressWarnings("serial")
+		List<Question> quiz1 = new ArrayList<Question>();
+    	
+            
+        quiz1.add(new Question("Do you want anything",Answer));
+        quiz1.add(new Question("Do you need anything?",Answer2));
+            
+    	
+    }
+
+    private Quiz getQuizByName(String name) {
+		name = name.toLowerCase();
+		for (Quiz quiz: this.quizzes) {
+			if (name.equals(quiz.getName().toLowerCase())) {
+				return quiz;
+			}
+		}
+		return null;
+	}
+	
+	
+	

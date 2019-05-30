@@ -1,0 +1,14 @@
+package com.cooksys.ftd.sprintboot.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Question {
+
+	private List<Answers> answers = new ArrayList<>();
+	
+	public Question(String question, List<Answers> answer) {
+		this.question = question;
+		this.answers=answer;
+	}
+}
