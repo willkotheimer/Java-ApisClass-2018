@@ -8,8 +8,10 @@ public class FirstJavaClass {
 
 	public static void main(String[] args) {
 		
+		
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Selenium 3.4\\chromedriver_win32.chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
+		
 		
 		//Get commands:
 		driver.get("/");
@@ -21,6 +23,7 @@ public class FirstJavaClass {
 		driver.navigate().back();
 		driver.navigate().forward();
 		driver.navigate().refresh();
+		driver.navigate().getClass();
 		
 		//Element Handling
 		driver.findElement(By.id(id)).click();
